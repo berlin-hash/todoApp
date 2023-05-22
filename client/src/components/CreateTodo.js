@@ -4,7 +4,7 @@ import {NavLink, useNavigate} from 'react-router-dom'
 const CreateTodo = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  // const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("0");
 
   const AddTask = async (e) => {
@@ -18,18 +18,18 @@ const CreateTodo = () => {
 
       },
       body: JSON.stringify({
-        title, description, priority
+        title, priority
       })
     })
 
     const data = await res.json()
 
     console.log(data);
-    if(! res.status === 200 | !data){
+    if(! res.status === 200 || !data || title === ""){
       window.alert("Invalid details")
     }
     else{
-      window.alert("Task added successfully")
+      // window.alert("Task added successfully")
       navigate('/');
     }
   }
@@ -39,7 +39,7 @@ const CreateTodo = () => {
     <section>
 
       <div className="container mt-5">
-        <h2>Create Todo</h2>
+        <h2 className="text-white">Create Todo</h2>
         <form action="POST">
           
           <div className="form-outline mb-4">
@@ -51,23 +51,23 @@ const CreateTodo = () => {
 
           </div>
 
-          <div className="form-outline mb-4">
+          {/* <div className="form-outline mb-4">
             <label htmlFor="description" className="form-label">Description</label>
             <input type="text" name="description" className="form-control" id="description" autoComplete='off'
             value={description}
             onChange={(e)=> setDescription(e.target.value)}
             placeholder="Description" />
-          </div>
+          </div> */}
 
           <div className="form-outline mb-4">
-            <label htmlFor="priority" className="form-label">Priority</label><br/>
+            <label htmlFor="priority" className="form-label text-white">Priority</label><br/>
             <input type="radio" name="priority" value="high" id="high" onClick={() => setPriority('2')} />
-            <label htmlFor="high">High</label><br/>
+            <label htmlFor="high" className="text-white"> High</label><br/>
             <input type="radio" name="priority" value="Medium" id="Medium" onClick={() => setPriority('1')} />
-            <label htmlFor="medium">Medium</label><br/>
+            <label htmlFor="medium" className="text-white"> Medium</label><br/>
 
             <input type="radio" name="priority" value="low" id="low" onClick={() => setPriority('0')} />
-            <label htmlFor="low">Low</label><br/>
+            <label htmlFor="low" className="text-white"> Low</label><br/>
 
 
           </div>

@@ -49,7 +49,7 @@ router.post('/add', async (req, res) => {
     const {title, description, priority, completed} = req.body;
     
     try{
-        const todo = await new Todo({title, description, priority, completed})
+        const todo = await new Todo({title, priority, completed})
         await todo.save();
         console.log("task submitted successfully");
         res.status(200).json({ message: 'Task added successfully' })
@@ -60,7 +60,7 @@ router.post('/add', async (req, res) => {
 })
 
 router.post('/remove', async (req, res) => {
-    const {title, description, priority, completed} = req.body;
+    const {title, priority, completed} = req.body;
 
 })
 module.exports = router

@@ -1,14 +1,14 @@
-const mongoose = require('mongoose')
+mongoose = require('mongoose')
 
 const TodoSchema = new mongoose.Schema({
   title:{
       type: String,
       required: true
   }  ,
-  description: {
-      type: String,
-      required: true
-  },
+  // description: {
+  //     type: String,
+  //     required: true
+  // },
   priority:{
       type: Number,
       default: 0,

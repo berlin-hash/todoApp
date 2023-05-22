@@ -5,7 +5,7 @@ const UpdateTodo = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [title, setTitle] = useState(location.state.title)
-    const [description, setDescription] = useState(location.state.description);
+    // const [description, setDescription] = useState(location.state.description);
     const [priority, setPriority] = useState(location.state.priority);
 
     const UpdateTask = async(e) => {
@@ -17,7 +17,7 @@ const UpdateTodo = () => {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    title, description, priority
+                    title, priority
                 })
             })
             const data = await res.json()
@@ -27,7 +27,7 @@ const UpdateTodo = () => {
                 throw new Error;
             }
             else{
-                window.alert("Task updated successfully")
+                // window.alert("Task updated successfully")
                 navigate('/');
               }
     
@@ -56,13 +56,13 @@ const UpdateTodo = () => {
 
                         </div>
 
-                        <div className="form-outline mb-4">
+                        {/* <div className="form-outline mb-4">
                             <label htmlFor="description" className="form-label">Description</label>
                             <input type="text" name="description" className="form-control" id="description" autoComplete='off'
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                                 placeholder="Description" />
-                        </div>
+                        </div> */}
 
                         <div className="form-outline mb-4">
                             <label htmlFor="priority" className="form-label">Priority</label><br />

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {NavLink, useNavigate} from 'react-router-dom'
+import { MdRemoveCircleOutline } from "react-icons/md";
+import { MdModeEdit, MdDoneOutline } from "react-icons/md";
 
 
 const DisplayTodos = () => {
@@ -75,7 +77,8 @@ const DisplayTodos = () => {
                 // eslint-disable-next-line
                 throw new Error;
             }
-            displayTodos();
+            displayTodos()
+            navigate('/')
         }
         catch(err){
             console.log(err);
@@ -98,7 +101,7 @@ const DisplayTodos = () => {
     }
 
     const toUpdatePage = (ele) => {
-        navigate('/updateTodo',{state: {_id: ele._id, title:ele.title, description: ele.description, priority: ele.priority, completed: ele.completed}} )
+        navigate('/updateTodo',{state: {_id: ele._id, title:ele.title,  priority: ele.priority, completed: ele.completed}} )
     }
 
     useEffect(() => {
@@ -124,38 +127,42 @@ const DisplayTodos = () => {
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
-                            <th scope="col">Description</th>
+                            {/* <th scope="col">Description</th> */}
                             <th scope="col">Priority</th>
                             <th scope="col">Status</th>
                             <th scope="col">Delete</th>
                             <th scope="col">Update</th>
-                            <th scope="col">ID</th>
+                            
 
                         </tr>
                     </thead>
                     <tbody>
                         {
                             todos.map((ele, i) => {
-                                return (
-                                    <>
-                                            <tr key={ele._id} >
-
-                                                <th scope="row" >{index++}</th>
-                                                <td >{ele.title}</td>
-                                                <td>{ele.description}</td>
-                                                <td>{priorityValue(ele.priority)}</td>
-                                                <td>
-                                                <input type="checkbox" id="status" name="status" value="status" checked={ele.completed} onChange={()=> updateTodo(ele._id,ele.completed)} />
-                                                </td>
-                                                <td><button className='btn btn-danger' onClick={()=> deleteTod(ele._id)}>Delete</button></td>
-                                                <td><button className='btn btn-success' onClick={()=> toUpdatePage(ele)}>Update</button></td>
-
-                                                <td>{ele._id}</td>
-                                            </tr>
-                                            
-                                    </>
-                                    
-                                )
+                                if(ele.completed === true){
+                                    return (
+                                        <>
+                                                <tr key={ele._id} >
+    
+                                                    <th scope="row" >{index++}</th>
+                                                    <td >{ele.title}</td>
+                                                    {/* <td>{ele.description}</td> */}
+                                                    <td>{priorityValue(ele.priority)}</td>
+                                                    <td>
+                                                    <input type="checkbox" id="status" name="status" value="status" checked={ele.completed} onChange={()=> updateTodo(ele._id,ele.completed)} />
+                                                    </td>
+                                                    <td><button className='btn btn-danger ' onClick={()=> deleteTod(ele._id)}><MdRemoveCircleOutline/></button>
+                
+                                                    </td>
+                                                    <td><button className='btn btn-success' onClick={()=> toUpdatePage(ele)}><MdModeEdit/></button></td>
+    
+                                                </tr>
+                                                
+                                        </>
+                                        
+                                    )
+                                }
+                                
                                 
                             })
                         }
@@ -163,6 +170,7 @@ const DisplayTodos = () => {
                     </tbody>
                 </table>
             </div>
+            
         </>
     )
 }
